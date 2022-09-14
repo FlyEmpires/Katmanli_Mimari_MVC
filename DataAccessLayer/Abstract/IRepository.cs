@@ -16,7 +16,7 @@ namespace DataAccessLayer.Abstract
         void Delete(T p);
 
         void Update(T p);
-        //değişiklikASDS
+       
 
         List<T> List(Expression<Func<T, bool>> filter);  //Şartlı Listeleme --> Lambda Notation
 

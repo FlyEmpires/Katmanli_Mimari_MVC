@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete.Repositories
 {
-    class CategoryRepositories : ICategoryDal
+  public class CategoryRepositories : ICategoryDal
     {
         Context c = new Context();
-        DbSet<Category> _object;
+         DbSet<Category> _object;
 
         public void Delete(Category p)
         {
