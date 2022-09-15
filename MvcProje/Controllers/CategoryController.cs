@@ -19,9 +19,9 @@ namespace MvcProje.Controllers
 
         public ActionResult GetCategoryList()
         {
-            var categoryvalues = cm.GetAllBL();
-            return View(categoryvalues);
+            //var categoryvalues = cm.GetAllBL();
+            return View();
         }
-            
+       
     }
 }
