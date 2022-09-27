@@ -1,0 +1,72 @@
+﻿@*@model IEnumerable<EntityLayer.Concrete.Listelemee>*@
+@*@model EntityLayer.Concrete.Writer*@
+@*@model EntityLayer.Concrete.Listelemee*@
+@model IEnumerable<EntityLayer.Concrete.Writer>
+
+@*@model List<string>*@
+
+@{
+    ViewBag.Title = "Liste";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<br />
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-sm" style="background-color:#ffd800;margin-right:10px; height:150px">
+            <div align="center">
+                <font size="8">
+                    @ViewBag.kategori <br />
+                </font>
+                <h5>Toplam Kategori Sayısı</h5>
+
+            </div>
+
+        </div>
+        <br />
+        <div class="col-sm" style="background-color:#b6ff00;margin-right:10px;">
+            <div align="center">
+                <font size="8">
+                    @ViewBag.baslik <br />
+                </font>
+                <h5>Yazılım Kategorisine Ait Başlık Sayısı</h5>
+
+            </div>
+           
+        </div> <br />
+               <div class="col-sm" style="background-color:#ffd800;margin-right:10px;">
+                   <div align="center">
+                       <font size="8">
+                           @ViewBag.sayi
+                       </font>
+                           <br />
+                           <h5>  A harfi Geçen Yazar Saayısı</h5>
+                       
+                   </div>
+               </div>
+               <div class="col-sm" style="background-color:#ff6a00;margin-right:10px;">
+                   <div align="center">
+                       <font size="8">
+                           @ViewBag.enfazla
+                       </font>
+                       <br />
+                       <h5>En Fazla Başlığa Ait Kategori Adı</h5>
+
+                   </div>
+               </div>
+               <div class="col-sm" style="background-color:#808080;">
+                   <div align="center">
+                       <font size="8">
+                           @ViewBag.msg
+                       </font>
+                       <br />
+                       <h5>True False Arasındaki Sayısal Fark</h5>
+
+                   </div>
+               </div>
+    </div>
+
+</div>

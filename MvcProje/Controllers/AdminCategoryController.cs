@@ -23,6 +23,8 @@ namespace MvcProje.Controllers
         [HttpGet]
         public ActionResult AddCategory()
         {
+          
+
             return View();
         }
         [HttpPost]
@@ -50,6 +52,18 @@ namespace MvcProje.Controllers
         {
             var categoryvalue = cm.GetByID(id);
             cm.CategoryDelete(categoryvalue);
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult EditCategory(int id)
+        {
+            var categoryvalue = cm.GetByID(id);
+            return View(categoryvalue);
+        }
+        [HttpPost]
+        public ActionResult EditCategory(Category p)
+        {
+            cm.CategoryUpdate(p);
             return RedirectToAction("Index");
         }
     }
