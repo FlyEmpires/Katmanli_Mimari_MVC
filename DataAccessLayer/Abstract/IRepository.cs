@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityLayer.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -17,6 +18,7 @@ namespace DataAccessLayer.Abstract
         void Delete(T p);
 
         void Update(T p);
+
        
 
         List<T> List(Expression<Func<T, bool>> filter);  //Şartlı Listeleme --> Lambda Notation

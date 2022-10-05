@@ -1,0 +1,88 @@
+﻿using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
+using DataAccessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
+using FluentValidation.Results;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace MvcProje.Controllers
+{
+    public class MessageController : Controller
+    {
+        // GET: Message
+        Context ctx = new Context();
+        
+        MessageManager mm = new MessageManager(new EfMessageDal());
+        public ActionResult Inbox()
+        {
+            ViewBag.gelenmesaj = (from s in ctx.Messages select s.MessageContent).Count();
+
+            var messagevalues = mm.GetListInbox();
+            return View(messagevalues);
+        }
+
+        public ActionResult Sendbox()
+        {
+            ViewBag.gelenmesaj = (from s in ctx.Messages select s.MessageContent).Count();
+
+            var messagevalues = mm.GetListSendbox();
+            return View(messagevalues);
+        }
+        [HttpGet]
+        public ActionResult NewMessage()
+        {
+
+            return View();
+        }
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult NewMessage(Message p)
+        {
+            MessageValidator messageValidator = new MessageValidator();
+            ValidationResult results = messageValidator.Validate(p);
+            if (results.IsValid)
+            {
+                p.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+
+                mm.MessageAdd(p);
+                return RedirectToAction("Sendbox");
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View();
+        }
+            //if (Request.Form["submitbutton1"] != null)
+            //{
+            //    mm.MessageAdd(p);
+            //}
+            //else if (Request.Form["submitButton2"] != null)
+            //{
+            //    // code for function 2
+            //}
+            //return View();
+      
+        public ActionResult GetInboxMessageDetails(int id)
+        {
+            var values = mm.GetByID(id);
+            return View(values);
+        }
+
+        public ActionResult GetSendboxMessageDetails(int id)
+        {
+            var values = mm.GetByID(id);
+            return View(values);
+        }
+
+
+    }
+}

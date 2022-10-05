@@ -23,6 +23,7 @@ namespace MvcProje.Controllers
         }
         public ActionResult Liste()
         {
+            ViewBag.gelenmesaj = (from s in ctx.Messages select s.MessageContent).Count();
             ViewBag.kategori = (from s in ctx.Categories select s.CategoryName).Count(); //çalışıyor
             ViewBag.baslik = (from s in ctx.Headings where s.CategoryID == 13 select s.HeadingName).Count(); //çalışıyor
             ViewBag.sayi = (from s in ctx.Writers where s.WriterName.Contains("a") select s.WriterName).Count(); //çalışıyor
