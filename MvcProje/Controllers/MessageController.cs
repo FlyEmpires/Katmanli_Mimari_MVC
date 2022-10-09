@@ -16,7 +16,8 @@ namespace MvcProje.Controllers
     {
         // GET: Message
         Context ctx = new Context();
-        
+        MessageValidator messageValidator = new MessageValidator();
+
         MessageManager mm = new MessageManager(new EfMessageDal());
         public ActionResult Inbox()
         {
@@ -43,7 +44,6 @@ namespace MvcProje.Controllers
         [HttpPost]
         public ActionResult NewMessage(Message p)
         {
-            MessageValidator messageValidator = new MessageValidator();
             ValidationResult results = messageValidator.Validate(p);
             if (results.IsValid)
             {

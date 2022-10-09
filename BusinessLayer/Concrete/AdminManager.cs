@@ -25,8 +25,8 @@ namespace BusinessLayer.Concrete
 
         public void AdminLogin(Admin admin)
         {
-            _adminDal.List(x=>x.AdminUserName==admin.AdminUserName && x.AdminPassword==admin.AdminPassword).FirstOrDefault();
-           
+            _adminDal.List(x => x.AdminUserName == admin.AdminUserName && x.AdminPassword == admin.AdminPassword).FirstOrDefault();
+
         }
 
         public Admin AdminLoginHata(string AdminUserName,string AdminPassword)
@@ -82,5 +82,7 @@ namespace BusinessLayer.Concrete
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

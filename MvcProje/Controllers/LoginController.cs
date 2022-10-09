@@ -9,9 +9,11 @@ using System.Web;
 using System.Web.Mvc;
 using FluentValidation.Results;
 using System.Web.Security;
+using DataAccessLayer.Concrete;
 
 namespace MvcProje.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         // GET: Login
@@ -27,6 +29,7 @@ namespace MvcProje.Controllers
             LoginValidator loginvalidator = new LoginValidator();
             ValidationResult results = loginvalidator.Validate(p);
             var logininfo = adm.AdminLoginHata(p.AdminUserName, p.AdminPassword);
+            
             var hata = adm.AdminHata(p.AdminUserName, p.AdminPassword);
 
             //if (results.IsValid)
@@ -72,6 +75,35 @@ namespace MvcProje.Controllers
             //}
             //return View();
             
+        }
+        [HttpGet]
+        public ActionResult WriterLogin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult WriterLogin(Writer p)
+        {
+            Context ctx = new Context();
+            var writeruserinfo = ctx.Writers.FirstOrDefault(x=>x.WriterMail==p.WriterMail && x.WriterPassword==p.WriterPassword);
+            if (writeruserinfo != null)
+            {
+                FormsAuthentication.SetAuthCookie(writeruserinfo.WriterMail, false);
+                Session["WriterMail"] = writeruserinfo.WriterMail;
+                return RedirectToAction("MyContent", "WriterPanelContent");
+            }
+                else
+            {
+
+            return RedirectToAction("WriterLogin");
+            }
+
+        }
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("Headings","Default");
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BusinessLayer.Concrete
 {
@@ -31,6 +32,22 @@ namespace BusinessLayer.Concrete
             return _writerDal.List();
         }
 
+        //public List<Content> GetListByWriterSession(string p,int id)
+        //{
+        //    //var writeridinfo = _writerDal.Get(x => x.WriterMail == p &&x.WriterID==id);
+
+        //    return 
+        //}
+        public int GetByEmailID(string mail)
+        {
+            //p = (string)HttpContext.Current.Session["WriterMail"];
+            return _writerDal.List(x => x.WriterMail == mail).Select(y => y.WriterID).FirstOrDefault();
+        }
+       
+
+            //return (string)HttpContext.Current.Session["WriterMail"];
+
+        
         public void WriterAdd(Writer writer)
         {
             _writerDal.Insert(writer);
