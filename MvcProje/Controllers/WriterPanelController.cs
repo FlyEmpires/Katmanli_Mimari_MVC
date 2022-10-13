@@ -6,6 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
+using FluentValidation.Results;
+using BusinessLayer.ValidationRules;
 
 namespace MvcProje.Controllers
 {
@@ -16,10 +20,39 @@ namespace MvcProje.Controllers
 
         HeadingManager hm = new HeadingManager(new EfHeadingDal());
         WriterManager wm = new WriterManager(new EfWriterDal());
+        WriterValidator writerValidator = new WriterValidator();
+
         int id;
-        public ActionResult WriterProfile()
+        [HttpGet]
+        public ActionResult WriterProfile(int id=0)
         {
+            string p = (string)Session["WriterMail"];
+
+           id = wm.GetByEmailID(p);
+            var writervalue = wm.GetByID(id);
+            return View(writervalue);
+        }
+
+        [HttpPost]
+        public ActionResult WriterProfile(Writer p)
+        {
+            ValidationResult result = writerValidator.Validate(p);
+            if (result.IsValid)
+            {
+                wm.WriterUpdate(p);
+                return RedirectToAction("WriterProfile");
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+
+                }
+            }
             return View();
+
+
         }
         //[AllowAnonymous]
         public ActionResult MyHeading(string p)
@@ -85,9 +118,9 @@ namespace MvcProje.Controllers
             hm.HeadingDelete(headingvalue);
             return RedirectToAction("MyHeading");
         }
-        public ActionResult AllHeading()
+        public ActionResult AllHeading(int p=1)
         {
-            var values = hm.GetList();
+            var values = hm.GetList().ToPagedList(p,4);
             return View(values);
         }
     }

@@ -18,19 +18,20 @@ namespace MvcProje.Controllers
         MessageValidator messageValidator = new MessageValidator();
 
         MessageManager mm = new MessageManager(new EfMessageDal());
-      
+        WriterManager wm = new WriterManager(new EfWriterDal());
         public ActionResult Inbox()
         {
-            
+          string  p = (string)Session["WriterMail"];
 
-            var messagevalues = mm.GetListInbox();
+            var messagevalues = mm.GetListInbox(p);
             return View(messagevalues);
         }
         public ActionResult Sendbox()
         {
             //ViewBag.gelenmesaj = (from s in ctx.Messages select s.MessageContent).Count();
+            string p = (string)Session["WriterMail"];
 
-            var messagevalues = mm.GetListSendbox();
+            var messagevalues = mm.GetListSendbox(p);
             return View(messagevalues);
         }
         public ActionResult GetInboxMessageDetails(int id)
@@ -53,10 +54,12 @@ namespace MvcProje.Controllers
         [HttpPost]
         public ActionResult NewMessage(Message p)
         {
+            string sender = (string)Session["WriterMail"];
+
             ValidationResult results = messageValidator.Validate(p);
             if (results.IsValid)
             {
-                p.SenderMail = "gizem@gmail.com";
+                p.SenderMail = sender;
                 p.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
 
                 mm.MessageAdd(p);

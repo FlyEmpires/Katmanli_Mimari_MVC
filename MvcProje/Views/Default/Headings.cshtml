@@ -61,19 +61,19 @@ to get the desired effect
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
-                        
-                 @foreach (var item in Model)
-                 {
-                        <li class="nav-item has-treeview">
-                            <a href="/Default/Headings/@item.HeadingID" class="nav-link">
-                                <p>
-                                    @item.HeadingName
-                                </p>
-                            </a>
 
-                        </li>
-                 }
-                        
+                        @foreach (var item in Model)
+                        {
+                            <li class="nav-item has-treeview">
+                                <a href="/Default/Headings/@item.HeadingID" class="nav-link">
+                                    <p>
+                                        @item.HeadingName
+                                    </p>
+                                </a>
+
+                            </li>
+                        }
+
 
                     </ul>
                 </nav>
@@ -87,7 +87,7 @@ to get the desired effect
             <!-- /.content-header -->
             <!-- Main content -->
             <div class="content">
-                @Html.Action("Index","Default")
+                @Html.Action("Index", "Default")
                 <!-- /.container-fluid -->
             </div>
             <!-- /.content -->

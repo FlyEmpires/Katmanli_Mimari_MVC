@@ -45,5 +45,19 @@ namespace BusinessLayer.Concrete
         {
             return _categorydal.List();
         }
+
+        public List<Category> GetListChart(Heading h)
+        {
+            //List<Heading> hd = new List<Heading>();
+            //return _categorydal.List(x => x.CategoryID == h.CategoryID).Select(x => new Heading { CategoryID = x.CategoryID }).ToList();
+
+            //return _categorydal.List(x => x.CategoryID == h.CategoryID).Select(h.HeadingName).Count();
+            return _categorydal.List();
+        }
+
+        public List<Category> GetListChart()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

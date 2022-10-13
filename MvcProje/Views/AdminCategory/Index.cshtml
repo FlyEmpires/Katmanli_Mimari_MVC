@@ -1,4 +1,6 @@
 ﻿@using EntityLayer.Concrete
+@*@model IEnumerable<EntityLayer.Concrete.Heading>*@
+   
 @model List<Category>
 @{
     ViewBag.Title = "Index";
@@ -23,7 +25,7 @@
             <td>@item.CategoryDescription</td>
             <td><a href="/AdminCategory/DeleteCategory/@item.CategoryID" class="btn btn-danger">Sil</a></td>
             <td><a href="/AdminCategory/EditCategory/@item.CategoryID" class="btn btn-warning">Güncelle</a></td>
-            <td><a href="#" class="btn btn-primary">Başlıklar</a></td>
+            <td><a href="/AdminCategory/CategoryHeadings/@item.CategoryID" class="btn btn-primary">Başlıklar</a></td>
         </tr>
     }
 

@@ -18,7 +18,7 @@ namespace MvcProje.Controllers
     {
         // GET: Login
         AdminManager adm = new AdminManager(new EfAdminDal());
-
+        WriterLoginManager wm = new WriterLoginManager(new EfWriterDal());
         public ActionResult Index()
         {
             return View();
@@ -84,8 +84,9 @@ namespace MvcProje.Controllers
         [HttpPost]
         public ActionResult WriterLogin(Writer p)
         {
-            Context ctx = new Context();
-            var writeruserinfo = ctx.Writers.FirstOrDefault(x=>x.WriterMail==p.WriterMail && x.WriterPassword==p.WriterPassword);
+            //Context ctx = new Context();
+            //var writeruserinfo = ctx.Writers.FirstOrDefault(x=>x.WriterMail==p.WriterMail && x.WriterPassword==p.WriterPassword);
+            var writeruserinfo =wm.GetWriter(p.WriterMail,p.WriterPassword);
             if (writeruserinfo != null)
             {
                 FormsAuthentication.SetAuthCookie(writeruserinfo.WriterMail, false);
@@ -103,7 +104,7 @@ namespace MvcProje.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction("Headings","Default");
+            return RedirectToAction("Headings", "Default");
         }
     }
 }

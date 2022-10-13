@@ -1,0 +1,28 @@
+﻿@using EntityLayer.Concrete
+@model List<Heading>
+@{
+    ViewBag.Title = "CategoryHeadings";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<table class="table table-striped projects">
+    <thead>
+        <tr>
+            <th style="width: 1%">
+                #
+            </th>
+            <th style="width: 20%">
+                Başlık Adı
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>@item.HeadingID</td>
+            <td>@item.HeadingName</td>
+        </tr>
+
+    }
+</table>

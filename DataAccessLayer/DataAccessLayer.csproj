@@ -55,6 +55,7 @@
     <Compile Include="Abstract\IAdminDal.cs" />
     <Compile Include="Abstract\IAdminRoleDal.cs" />
     <Compile Include="Abstract\ICategoryDal.cs" />
+    <Compile Include="Abstract\IChartDal.cs" />
     <Compile Include="Abstract\IContactDal.cs" />
     <Compile Include="Abstract\IContentDal.cs" />
     <Compile Include="Abstract\IHeadingDal.cs" />

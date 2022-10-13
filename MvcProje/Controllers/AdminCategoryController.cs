@@ -15,6 +15,7 @@ namespace MvcProje.Controllers
     {
         // GET: AdminCategory
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
+        HeadingManager hm = new HeadingManager(new EfHeadingDal());
     [Authorize(Roles="B")]
         public ActionResult Index()
         {
@@ -48,6 +49,12 @@ namespace MvcProje.Controllers
             }
            
             return View();
+        }
+        public ActionResult CategoryHeadings(int id)
+        {
+
+            var values = hm.GetListCategories(id);
+            return View(values);
         }
         public ActionResult DeleteCategory(int id)
         {

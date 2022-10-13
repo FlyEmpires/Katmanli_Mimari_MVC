@@ -26,7 +26,10 @@ namespace MvcProje.Controllers
 
             return View();
         }
-     
+       public ActionResult HomePage()
+        {
+            return View();
+        }
 
     }
 }

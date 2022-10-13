@@ -19,19 +19,20 @@ namespace MvcProje.Controllers
         MessageValidator messageValidator = new MessageValidator();
 
         MessageManager mm = new MessageManager(new EfMessageDal());
-        public ActionResult Inbox()
+        [Authorize]
+        public ActionResult Inbox(string p)
         {
             ViewBag.gelenmesaj = (from s in ctx.Messages select s.MessageContent).Count();
 
-            var messagevalues = mm.GetListInbox();
+            var messagevalues = mm.GetListInbox(p);
             return View(messagevalues);
         }
 
-        public ActionResult Sendbox()
+        public ActionResult Sendbox(string p)
         {
             ViewBag.gelenmesaj = (from s in ctx.Messages select s.MessageContent).Count();
 
-            var messagevalues = mm.GetListSendbox();
+            var messagevalues = mm.GetListSendbox(p);
             return View(messagevalues);
         }
         [HttpGet]

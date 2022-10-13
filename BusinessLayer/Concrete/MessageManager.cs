@@ -27,15 +27,15 @@ namespace BusinessLayer.Concrete
 
         }
 
-        public List<Message> GetListInbox()
+        public List<Message> GetListInbox(string p)
         {
-            return _Messagedal.List(x => x.ReceiverMail == "mehmet@hotmail.com");
+            return _Messagedal.List(x => x.ReceiverMail == p);
         }
 
         
-        public List<Message> GetListSendbox()
+        public List<Message> GetListSendbox(string p)
         {
-            return _Messagedal.List(x=>x.SenderMail== "gizem@gmail.com");
+            return _Messagedal.List(x=>x.SenderMail== p);
         }
 
        
